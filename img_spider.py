@@ -41,7 +41,7 @@ class MySpider(scrapy.Spider):
         c = response.text.split(",")
         imgs = [i for i in c if re.match('^\[(.+)jpg"$', i)]
         print(imgs)
-        for i in imgs[:10]:
+        for i in imgs:
             filename = i.split('/')[-1]
             url = i.replace('["', '').replace('"', '')
             try:
@@ -59,7 +59,7 @@ configure_logging()
 process = CrawlerRunner()
 @defer.inlineCallbacks
 def crawl():
-    yield process.crawl(MySpider, search_term='Carrot')
+    yield process.crawl(MySpider, search_term='Radish')
     reactor.stop()
 crawl()
 reactor.run()
